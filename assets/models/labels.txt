@@ -1,0 +1,5 @@
+clay
+loam
+not
+sandy
+silt
