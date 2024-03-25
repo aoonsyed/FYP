@@ -271,7 +271,9 @@ class _NewTestScreenState extends State<NewTestScreen> {
         },
       );
       return;
+    
     }
+    
 
     // Load and preprocess the image
     img1.Image image = img1.decodeImage(await imageFile!.readAsBytes())!;
@@ -305,29 +307,31 @@ class _NewTestScreenState extends State<NewTestScreen> {
 
     // Show dialog with classification result
     showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("Classification Result"),
-          content: Text("Your Soil Type is: $predictedLabel"),
-          actions: <Widget>[
-            TextButton(
-              child: Text("OK"),
-              onPressed: predictedLabel == '$predictedLabel'
-                  ? () {
-                      Navigator.pop(context, true);
-                    }
-                  : () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ResultScreen()));
-                    },
-            ),
-          ],
-        );
-      },
+  context: context,
+  builder: (BuildContext context) {
+    return AlertDialog(
+      title: Text("Classification Result"),
+      content: Text("Your Soil Type is: $predictedLabel"),
+      actions: <Widget>[
+        TextButton(
+          child: Text("OK"),
+          onPressed: () {
+            Navigator.of(context).pop(); // Close the dialog
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ResultScreen(
+                  image: imageFile,
+                  soilType: predictedLabel,
+                ),
+              ),
+            );
+          },
+        ),
+      ],
     );
+  },
+);
   }
 
   Uint8List imageToByteListFloat32(
