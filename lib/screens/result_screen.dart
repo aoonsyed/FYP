@@ -59,7 +59,7 @@ class _ResultScreenState extends State<ResultScreen> {
     }
 
     var input = buffer.reshape([1, 224, 224, 3]);
-    var output = List.filled(1, List.filled(2, 0.0)); 
+    var output = List.filled(1, List.filled(2, 0.0));
 
     _interpreter.run(input, output);
 
@@ -76,16 +76,26 @@ class _ResultScreenState extends State<ResultScreen> {
   void _showDialog(BuildContext context, String message) {
     showDialog(
       context: context,
+      barrierDismissible: true,
+  barrierColor: Colors.black.withOpacity(0.5),
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(
-            "Predicted Features",
-            style: TextStyle(color: Colors.green, fontSize: 24, fontWeight: FontWeight.bold),
+        backgroundColor: Colors.white.withOpacity(0.9),
+          title: Center(
+            child: Text(
+              "Predicted Features",
+              style: TextStyle(color: Colors.green, fontSize: 24, fontWeight: FontWeight.bold),
+            ),
           ),
           content: SingleChildScrollView(
-            child: Text(
-              message,
-              style: TextStyle(fontSize: 18),
+            child: Center(
+              child: Text(
+                message,
+                style: TextStyle(
+                  fontSize: 20,fontWeight: FontWeight.bold,
+                  color: Colors.brown
+                  ),
+              ),
             ),
           ),
           actions: <Widget>[
@@ -105,16 +115,21 @@ class _ResultScreenState extends State<ResultScreen> {
     String cropsList = crops.join("\n");
     showDialog(
       context: context,
+      barrierDismissible: true,
+  barrierColor: Colors.black.withOpacity(0.5),
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(
-            "Predicted Crops",
-            style: TextStyle(color: Colors.green, fontSize: 24, fontWeight: FontWeight.bold),
+         backgroundColor: Colors.white.withOpacity(0.9),
+          title: Center(
+            child: Text(
+              "Predicted Crops",
+              style: TextStyle(color: Colors.green, fontSize: 24, fontWeight: FontWeight.bold),
+            ),
           ),
           content: SingleChildScrollView(
             child: Text(
               "Crops suitable for ${widget.soilType}:\n$cropsList",
-              style: TextStyle(fontSize: 18),
+              style: TextStyle(fontSize: 18,color: Colors.brown),
             ),
           ),
           actions: <Widget>[
@@ -131,6 +146,11 @@ class _ResultScreenState extends State<ResultScreen> {
   }
 
   void predictCropsBasedOnSoilType() {
+    if (widget.soilType == "Unidentified") {
+      // Don't predict crops if soil type is unidentified
+      return;
+    }
+
     List<String> crops = [];
     switch (widget.soilType) {
       case "Clay Loam":
@@ -190,21 +210,23 @@ class _ResultScreenState extends State<ResultScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Image Selected"),
+        backgroundColor: Colors.brown,
+        title: Text(
+          "Image Selected",
+          style: TextStyle(color: Colors.white),
+          ),
         leading: BackButton(
           onPressed: () {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => ImageSelectedScreen(image: widget.image)),
-           
-
             );
           },
         ),
       ),
       body: SingleChildScrollView(
         child: Container(
-          margin: EdgeInsets.all(20),
+          margin: EdgeInsets.all(70),
           child: Column(
             children: [
               Container(
@@ -217,17 +239,18 @@ class _ResultScreenState extends State<ResultScreen> {
                 alignment: Alignment.topLeft,
                 child: Text(
                   "Soil Type: ${widget.soilType}",
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Colors.green), // Green color
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Colors.brown), // Green color
                 ),
               ),
               SizedBox(height: 40),
-              ElevatedButton(
-                onPressed: performPrediction,
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(Colors.green), // Set button color to green
-                ),
-                child: Text(
-                  "PREDICT FEATURES",
+              if (widget.soilType != "Unidentified") // Add condition here
+                ElevatedButton(
+                  onPressed: performPrediction,
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.green), // Set button color to green
+                  ),
+                  child: Text(
+                    "PREDICT FEATURES",
                   style: TextStyle(color: Colors.white), // Set text color to white
                 ),
               ),

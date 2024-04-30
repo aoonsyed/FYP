@@ -14,12 +14,12 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   int currentIndex = 0;
   List data = [
     {
-      "title": "Welcome to Soil Sense",
+      "title": "Welcome to TerraView",
       "description":
           "Slide through diverse soil types, unravel key features and harness the predictive power for smarter farming decisions."
     },
     {
-      "title": "Soil Sense is your ally in precision agriculture",
+      "title": "TerraView is your ally in precision agriculture",
       "description":
           "Explore soil types effortlessly decode distinctive features and receive personalized crop prediction."
     },
@@ -44,7 +44,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           },
           child: Text(
             "Skip",
-            style: TextStyle(color: Colors.grey),
+            style: TextStyle(color: Colors.grey,
+            fontSize: 25.0),
           ),
         ),
       ]),
@@ -65,25 +66,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                      height: 150,
+                      height: 300,
                       child: Image.asset('assets/images/image1.png')),
-                  RichText(
-                    text: TextSpan(
-                      text: "Soil",
-                      style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.green),
-                      children: [
-                        TextSpan(
-                            text: "Sense",
-                            style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.brown))
-                      ],
-                    ),
-                  ),
+                  
                   SizedBox(
                     height: 25,
                   ),
@@ -93,7 +78,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         data[index]["title"],
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 24,
+                          fontSize: 32,
                           color: Color.fromARGB(1000, 69, 132, 27),
                           fontWeight: FontWeight.bold,
                         ),

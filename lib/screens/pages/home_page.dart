@@ -46,12 +46,15 @@ class _HomePageState extends State<HomePage> {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text(
-            "Home",
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 32,
-              fontWeight: FontWeight.w500,
+          backgroundColor: Colors.brown,
+          title: Center(
+            child: Text(
+              "Home",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 32,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
         ),
@@ -64,8 +67,8 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Text(_weather!.areaName ?? " ", style: TextStyle(fontSize: 20)),
                     Container(
-                      height: 90,
-                      width: 90,
+                      height: 110,
+                      width: 110,
                       child: Image(
                         image: NetworkImage(
                             "https://openweathermap.org/img/wn/${_weather!.weatherIcon}@4x.png"),
@@ -75,11 +78,11 @@ class _HomePageState extends State<HomePage> {
                       "${_weather!.temperature?.celsius!.toStringAsFixed(0)} c",
                       style: TextStyle(fontSize: 30),
                     ),
-                    SizedBox(height: 30),
-                    Container(height: 220, child: Image.asset('assets/images/image1.png')),
+                    SizedBox(height: 15),
+                    Container(height: 200, child: Image.asset('assets/images/image1.png')),
                     Text(
-                      "Welcome to Soil Sense",
-                      style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                      "Welcome to TerraView",
+                      style: TextStyle(fontSize: 27, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(
                       height: 25,

@@ -7,10 +7,11 @@ class UserManual extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.brown,
         title: Text(
           "User Manual",
           style: TextStyle(
-            color: Colors.black,
+            color: Colors.white,
             fontSize: 32,
             fontWeight: FontWeight.bold,
           ),

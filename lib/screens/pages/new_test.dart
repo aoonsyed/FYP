@@ -93,27 +93,46 @@ class _NewTestScreenState extends State<NewTestScreen> {
     // Show fancy dialog with classification result
     showDialog(
       context: context,
+      barrierDismissible: true,
+  barrierColor: Colors.black.withOpacity(0.5),
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Classification Result"),
+           backgroundColor: Colors.white.withOpacity(0.9),
+          title: Center(
+            child: Text(
+              "Classification Result",
+            style: TextStyle(
+              color: Colors.brown
+            ),
+            ),
+          ),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Your Soil Type is:",
-                style: TextStyle(fontWeight: FontWeight.bold),
+              Center(
+                child: Text(
+                  "Your Soil Type is:",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.brown
+                    ),
+                ),
               ),
               SizedBox(height: 10),
-              Text(
-                predictedLabel,
-                style: TextStyle(fontSize: 18),
+              Center(
+                child: Text(
+                  predictedLabel,
+                  style: TextStyle(fontSize: 18),
+                ),
               ),
             ],
           ),
           actions: <Widget>[
             TextButton(
-              child: Text("OK"),
+              child: Icon(Icons.arrow_forward,
+              color:Colors.brown ,
+              ),
               onPressed: () {
                 Navigator.of(context).pop(); // Close the dialog
                 Navigator.push(
@@ -154,11 +173,12 @@ class _NewTestScreenState extends State<NewTestScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.brown,
         automaticallyImplyLeading: true,
         title: Text(
           "Classify Soil",
           style: TextStyle(
-            color: Colors.black,
+            color: Colors.white,
             fontSize: 32,
             fontWeight: FontWeight.bold,
           ),
@@ -181,10 +201,15 @@ class _NewTestScreenState extends State<NewTestScreen> {
                                 fit: BoxFit.fill,
                               )),
                         SizedBox(height: 20),
-                        ElevatedButton(
-                          onPressed: classifyImage,
-                          child: Text("Classify Image"),
-                        ),
+                        CustomButton(
+                          label: 'Classify Image',
+                         onTap: classifyImage,
+                         ),
+                         //Old Button
+                        // ElevatedButton(
+                        //   onPressed: classifyImage,
+                        //   child: Text("Classify Image"),
+                        // ),
                       ],
                     )
                   : Column(

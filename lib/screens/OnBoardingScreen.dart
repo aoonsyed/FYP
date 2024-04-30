@@ -13,11 +13,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   PageController pageController = PageController();
   int currentIndex=0;
   List data = [{
-    "title":"Welcome to Soil Sense",
+    "title":"Welcome to SoilSense",
     "description":"Slide through diverse soil types, unravel key features and harness the predictive power for smarter farming decisions."
   },
     {
-      "title":"Soil Sense is your ally in precision agriculture",
+      "title":"SoilSense is your ally in precision agriculture",
       "description":"Explore soil types effortlessly decode distinctive features and receive personalized crop prediction."
     },
     {
